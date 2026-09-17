@@ -1,0 +1,51 @@
+<!--practice.vue watch 情況五 - 監視上述多個數據-->
+<template>
+    <div class="practice">
+        <h2>姓名:{{practice.name}}</h2>
+        <h2>年齡:{{practice.age}}</h2>
+        <h2>汽車:{{practice.car.c1}}、{{ practice.car.c2}}</h2>
+        <button @click="changeName">修改名字</button>
+        <button @click="changeAge">修改年齡</button>
+        <button @click="changeC1">修改第一台車</button>
+        <button @click="changeC2">修改第二台車</button>
+        <button @click="changeCar">修改整個車</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {reactive,watch} from 'vue'
+
+//數據
+let practice = reactive({
+    name:'張三',
+    age:18,
+    //對象類型
+    car:{
+        c1:'toyota',
+        c2:'tesla'
+    }
+})
+//方法
+function changeName(){
+    practice.name += '~'
+}
+function changeAge(){
+    practice.age += 1
+}
+function changeC1(){
+    practice.car.c1 = '奧迪'
+}
+function changeC2(){
+    practice.car.c2 = '大眾'
+}
+function changeCar(){
+    practice.car = {c1:'雅迪',c2:'艾瑪'}
+}
+
+// 監視多個數據:人名、第一台車
+watch([()=>practice.name,()=>practice.car.c1],(newValue,oldValue)=>{
+    console.log('person.car變化',newValue,oldValue)
+},{deep:true})
+</script>
+
+<!--註:也可寫 ()=>practice.name,practice.car -->

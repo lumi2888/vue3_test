@@ -1,0 +1,39 @@
+<!--practice.vue computed 計算屬性-->
+<template>
+    <div class="practice">
+        姓:<input type="text" v-model="firstName"> <br>
+        名:<input type="text" v-model="lastName"> <br>
+        <button @click="changeFullName">修改姓名</button>
+        全名 :<span>{{ fullName }}</span> <br>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+     import {ref,computed} from 'vue';
+
+     let firstName = ref('orange')
+     let lastName = ref('tea')
+
+       //fullName 是計算屬性且只能讀
+    /*  let fullName = computed(()=>{
+         return firstName.value.slice(0,1).toUpperCase() + firstName.value.slice(1) + '-' + lastName.value
+      })
+    */
+      //fullName 是計算屬性且可讀可寫
+      let fullName = computed({
+        // 讀取
+        get(){
+            return firstName.value.slice(0,1).toUpperCase() + firstName.value.slice(1) + '-' + lastName.value
+        },
+        // 修改
+        set(val){           
+            const [str1,str2] = val.split('-') // // 把傳入的字串依照 "-" 分開
+            firstName.value = str1
+            firstName.value = str2 //str2 會覆蓋 str1 的值
+        }
+      })
+     function changeFullName(){
+        fullName.value = 'lemon-juice'
+     }
+
+</script>

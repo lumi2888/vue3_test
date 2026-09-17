@@ -1,0 +1,36 @@
+<!--practice.vue watch 情況三 - 監視 reactive 定義的物件型別資料-->
+<template>
+    <div class="practice">
+        <h2>姓名:{{practice.name}}</h2>
+        <h2>年齡:{{practice.age}}</h2>
+        <button @click="changeName">修改名字</button>
+        <button @click="changeAge">修改年齡</button>
+        <button @click="changePractice">修改全部</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {reactive,watch} from 'vue'
+//數據
+let practice = reactive({
+    name:'張三',
+    age:18
+})
+//方法
+function changeName(){
+    practice.name += '~'
+}
+function changeAge(){
+    practice.age += 1
+}
+function changePractice(){
+    Object.assign(practice,{name:'李四',age:80})
+}
+/*監視 reactive 定義的物件型別資料，可以直接監視物件裡面屬性的變化
+  且預設是深度監視。
+ */
+watch(practice,(newValue,oldValue)=>{
+    console.log('practice變化',newValue,oldValue)
+})
+
+</script>

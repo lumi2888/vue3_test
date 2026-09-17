@@ -1,0 +1,31 @@
+<!--practice.vue toRefs and toRef-->
+<template>
+    <div class="practice">
+        <h2>姓名:{{practice.name}}</h2>
+        <h2>年齡:{{practice.age}},{{ nl }}</h2>
+        <button @click="changeName">修改姓名</button>
+        <button @click="changeAge">修改年齡</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+     import {reactive,toRefs,toRef} from 'vue'
+
+     //數據
+     // reactive() 整個物件響應式
+     let practice = reactive({
+        name: 'Sunny',
+        age: 18
+     })
+
+     let {name, age} = toRefs(practice)
+     let nl = toRef(practice, 'age')
+
+     //方法
+     function changeName() {
+        name.value += '~';
+     }
+     function changeAge() {
+        age.value += 1;
+     }
+</script>

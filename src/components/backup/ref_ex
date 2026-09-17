@@ -1,0 +1,33 @@
+<!--practice.vue ref-->
+<template>
+    <div class="practice">
+        <h2>一輛{{car.brand}}車 價值{{car.price}}萬</h2>
+        <button @click="changePrice">修改汽車的價格</button>
+        <button @click="changeCar">修改汽車</button>
+    <br><br/>
+    <h2>當前求和為:{{sum}}</h2>
+    <button @click="changeSum">sum+1</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {ref,reactive} from 'vue'
+
+//數據
+let car = reactive({ brand: 'Toyota', price: 100 })
+let sum = ref(0)
+
+//方法
+function changePrice(){
+    car.price += 10
+}
+
+function changeSum(){
+    sum.value += 1
+}
+function changeCar(){
+    //car.value = { brand: 'Honda', price: 200 } -> ref
+    Object.assign(car, { brand: 'Honda', price: 200 }) // reactive，把新資料更新到 car.value 這個物件裡。
+}
+
+</script>

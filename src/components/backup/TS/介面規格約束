@@ -1,0 +1,18 @@
+<!--TS 介面規格約束-->
+<template>
+    <div class="practice">
+       
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {type personinter,type persons} from '@/types'
+
+// let person:personinter = {id:'asyud7asfd01',name:'張三',age:60}
+
+let personlist:persons = [
+    {id:'asyud7asfd01',name:'張三',age:60},
+    {id:'asyud7asfd02',name:'李四',age:18},
+    {id:'asyud7asfd03',name:'王五',age:5},
+]
+</script>

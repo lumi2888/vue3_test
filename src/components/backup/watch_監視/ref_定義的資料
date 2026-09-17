@@ -1,0 +1,28 @@
+<!--practice.vue watch 情況一 - 監視 ref 定義的基本類型資料-->
+<template>
+    <div class="practice">
+       <h2>當前求和為:{{sum}}</h2>
+       <button @click="changeSum">sum+1</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {ref,watch} from 'vue'
+
+//數據
+let sum = ref(0) //sum 為 ref 定義的基本類型資料
+
+//方法
+function changeSum(){
+    sum.value++
+}
+
+//監視 當新值大於10，停止監視。
+const stopWatch = watch(sum,(newValue,oldValue)=>{
+    console.log('sum發生了變化',newValue,oldValue)
+    if(newValue >= 10){
+        stopWatch()
+    }
+})
+
+</script>

@@ -1,0 +1,41 @@
+<!--practice.vue reactive-->
+<template>
+    <div class="practice">
+        <h2>一輛{{car.brand}}車 價值{{car.price}}萬</h2>
+        <button @click="changePrice">修改汽車的價格</button>
+    <br><br/>
+    <h2>遊戲清單</h2>
+    <ul>
+                                  <!--
+                                      :(v-bind:的縮寫), key:目前使用此筆資料的game.id
+                                      目的:把 HTML 屬性綁定到 Vue 的資料，
+                                      讓屬性使用變數真正的值。
+                                  -->
+        <li v-for="game in games" :key="game.id">{{ game.name }}</li> <!--該筆資料的 name 顯示-->
+    </ul>
+    <button @click="changeFirstGameName">修改第一個遊戲名字</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import { reactive } from 'vue'
+
+//數據
+let car = reactive({ brand: 'Toyota', price: 100 })
+let games = reactive([
+    {id: 'aysdytfsatr01',name: 'GTA5'},
+    {id: 'aysdytfsatr02',name: 'The Witcher 3'},
+    {id: 'aysdytfsatr03',name: 'Cyberpunk 2077'}
+])
+
+//方法
+function changePrice(){
+    car.price += 10
+    console.log(car.price)
+}
+
+function changeFirstGameName(){
+    games[0].name = 'GTA Vice City'
+}
+
+</script>

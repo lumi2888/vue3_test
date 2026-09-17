@@ -1,0 +1,44 @@
+<!--practice.vue watch 情況二 - 監視 ref 定義的物件型別資料-->
+<template>
+    <div class="practice">
+        <h2>姓名:{{practice.name}}</h2>
+        <h2>年齡:{{practice.age}}</h2>
+        <button @click="changeName">修改名字</button>
+        <button @click="changeAge">修改年齡</button>
+        <button @click="changePractice">修改全部</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {ref,watch} from 'vue'
+//數據
+let practice = ref({
+    name:'張三',
+    age:18
+})
+//方法
+function changeName(){
+    practice.value.name += '~'
+}
+function changeAge(){
+    practice.value.age += 1
+}
+function changePractice(){
+    practice.value = {name:'李四',age:90}
+}
+/*監視 ref 的物件型資料，預設監視整個物件是否被替換
+  如果要監視物件內部屬性的變化，需使用 deep:true。
+
+  第一個參數: 被監視的數據
+  第二個參數: 資料改變時執行的函式
+  第三個參數: 配置對象(deep、immediate)
+
+*/
+watch(practice,(newValue,oldValue)=>{
+    console.log('practice發生變化',newValue,oldValue)
+},{deep:true,immediate:true}) //深度監視、立即監視(一開始能先看到值)
+</script>
+
+<!--*註解
+     deep:true 用來監視物件內部屬性的變化。
+     -->
