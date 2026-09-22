@@ -1,5 +1,6 @@
-// 定義一個 interface(介面)，用於限制 person 對象的具體屬性
-// 匯出 personinter 的規格書
+/*定義一個 interface(介面)，用於限制 person 對象的具體屬性
+  並匯出 personinter 的規格書
+*/
 export interface personinter {
     id:string,
     name:string,

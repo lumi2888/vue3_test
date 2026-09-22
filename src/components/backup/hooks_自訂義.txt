@@ -1,4 +1,5 @@
-<!--子組件-->
+<!--Practice.vue-->
+
 <template>
     <div class="practice">
       <h2>當前求和為:{{sum}},放大10背後{{bigsum}}</h2>
@@ -24,3 +25,8 @@ img{
    margin-right: 10px;
 }
 </style>
+____________________________________________________________
+在 src 下，建立 hooks folder
+參考: useDog、useSum
+
+vscode安裝: npm i axios

@@ -5,20 +5,33 @@ import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import Person from './components/Person.vue'
 import Practice from './components/Practice.vue'
-import {reactive} from 'vue'
-import {type  persons} from '@/types'
+import {ref,onMounted} from 'vue'
+import {RouterView,RouterLink} from 'vue-router'
 
-let personlist:persons = reactive([
-  {id:'asudfysafd01',name:'張三',age:18},
-  {id:'asudfysafd02',name:'李四',age:20},
-  {id:'asudfysafd03',name:'王五',age:22},
-])
+let isShow = ref(true) // 初始值為 true
 
-console.log(personlist)
+onMounted(()=>{
+   console.log('父--mount complete')
+})
+
 </script>
 
-<!--寫 HTML 結構 Ex:顯示 Person 元件-->
+<!--寫 HTML 結構 Ex:顯示 Person 組件-->
 <template>
+  <div class="app">
+    <h2>Vue 路由測試</h2>
+    <!--導航區-->
+    <div class="navigate">
+      <RouterLink to="/home">首頁</RouterLink>
+      <RouterLink to="/news">新聞</RouterLink>
+      <RouterLink to="/about">關於</RouterLink>
+    </div>
+
+    <!--展示區: 此區可能會展示各種組件，但需看路徑。-->
+    <div class="main-content">
+      <RouterView></RouterView>
+    </div>
+  </div>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 

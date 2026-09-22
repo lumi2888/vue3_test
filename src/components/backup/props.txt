@@ -1,0 +1,71 @@
+
+<!--App.vue 父組件-->
+<!--setup:自動處理元件設定-->
+<script lang="ts" setup name="App"> // name 不寫時則為預設名
+import Practice from './components/Practice.vue'
+import {reactive} from 'vue'
+import {type  persons} from '@/types' // type 型別
+
+// 根據 index.ts 自訂義類型
+let personlist = reactive<persons>([
+  {id:'asudfysafd01',name:'張三',age:18},
+  {id:'asudfysafd02',name:'李四',age:20},
+  {id:'asudfysafd03',name:'王五',age:22},
+])
+
+console.log(personlist)
+</script>
+<template>
+
+  <!--透過 props 傳值
+  註:
+  「:」v-bind:縮寫，代表使用變數值。
+  -->
+  <!--Practice :list="personlist"/ 接收list，並限制類型-->
+  <Practice a="123"/> <!--設定 props 的預設值-->
+
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+      <Person />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
+</template>
+_______________________________________________________________
+
+<!--Practice.vue 子組件-->
+<template>
+    <div class="practice">
+       <u1>
+        <!--讀取 list 資料-->>
+        <li v-for="item in list" :key="item.id">
+            {{ item.name }}--{{ item.age }}
+        </li>
+       </u1>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {type  persons} from '@/types'
+
+// 接收父組件傳入的資料
+   //defineProps(['list'])
+
+// 接收 list，並限制類型
+   //defineProps<{list:persons}>()
+
+// 接收 list，若沒傳則設定 props 預設值
+   withDefaults(defineProps<{list?:persons}>(),{
+    list:()=> [{id:'id1',name:'june',age:19}]
+   })
+
+// 接收 a,同時保存props
+/* let x = defineProps(['list'])
+   console.log(x.list)
+*/

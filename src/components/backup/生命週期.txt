@@ -1,0 +1,84 @@
+<!--Practice.vue 子組件-->
+<template>
+    <div class="practice">
+      <h2>當前求和為:{{sum}}</h2>
+      <button @click="add">sum</button>
+    </div>
+</template>
+
+<script lang="ts" setup name="Practice">
+import {ref,onBeforeMount,onMounted,onBeforeUpdate,onUpdated,onBeforeUnmount,onUnmounted} from 'vue'
+
+let sum = ref(0)
+
+function add(){
+   sum.value += 1
+}
+// create
+console.log('create')
+
+// mount
+onBeforeMount(()=>{
+   console.log('mount before')
+})
+// mount complete(完成)
+onMounted(()=>{
+   console.log('子--mount complete')
+})
+
+// update before
+onBeforeUpdate(()=>{
+   console.log('update before')
+})
+// update complete
+onUpdated(()=>{
+   console.log('update complete')
+})
+
+//unmount before
+onBeforeUnmount(()=>{
+   console.log('unmount before')
+})
+//unmount complete
+onUnmounted(()=>{
+   console.log('unmount complete')
+})
+_______________________________________________________________
+
+<!--App.vue 父組件-->
+
+<!--setup:自動處理元件設定-->
+<script lang="ts" setup name="App"> // name 不寫時則為預設名
+import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue'
+import Person from './components/Person.vue'
+import Practice from './components/Practice.vue'
+import {ref,onMounted} from 'vue'
+
+let isShow = ref(true) // 初始值為 true
+
+onMounted(()=>{
+   console.log('父--mount complete')
+})
+
+</script>
+
+<!--寫 HTML 結構 Ex:顯示 Person 組件-->
+<template>
+
+<!--如果 isShow 為 true，就顯示 <Practice> 組件-->
+  <Practice v-if="isShow"/>
+
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+      <Person />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
+</template>

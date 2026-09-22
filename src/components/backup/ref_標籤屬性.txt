@@ -2,7 +2,7 @@
 <template>
     <div class="practice">
         <h1>Taiwan</h1>
-        <h2 ref="title2">US</h2>
+        <h2 ref="title1">US</h2>
         <h3>Japan</h3>
         <button @click="showLog">country</button>
     </div>
@@ -11,15 +11,15 @@
 <script lang="ts" setup name="Practice">
 import {ref} from 'vue'
 
-// 建立 title2，用於儲存 ref 標記的內容
-let title2 = ref()
+// 建立 title1，用於儲存 ref 標記的內容
+let title1 = ref()
 
 let a = ref(0)
 let b = ref(1)
 let c = ref(2)
 
 function showLog(){
-    console.log(title2.value)
+    console.log(title1.value)
 }
 
 // 公開內部變數，讓父元件能讀取
@@ -29,7 +29,7 @@ defineExpose({a,b,c})
 <!--ref 標籤屬性
     Practice.vue(子組件)
     App.vue(父組件)
-    - title2 -> HTML DOM
+    - title1 -> HTML DOM
     - ren -> component(組件)實例 有保護機制，所以需透過 defineExpose()
     
 -->
@@ -44,11 +44,11 @@ import Person from './components/Person.vue'
 import Practice from './components/Practice.vue'
 import {ref} from 'vue'
 
-let title2 = ref()
+let title1 = ref()
 let ren = ref()
 
 function showLog(){
-  console.log(title2.value)
+  console.log(title1.value)
   console.log(ren.value)
 }
 </script>
@@ -60,7 +60,7 @@ function showLog(){
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      <h2 ref="title2">你好</h2>
+      <h2 ref="title1">你好</h2>
       <button @click="showLog">result</button>
       <button @click="showLog">test</button>
       <Person />
