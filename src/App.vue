@@ -22,9 +22,13 @@ onMounted(()=>{
     <h2>Vue 路由測試</h2>
     <!--導航區-->
     <div class="navigate">
+      
+      <!--to 字串寫法，直接指定要跳轉的路徑
+         :to 物件寫法，可指定路徑且也能加其他路由資訊(name、query、params)
+      -->
       <RouterLink to="/home">首頁</RouterLink>
       <RouterLink to="/news">新聞</RouterLink>
-      <RouterLink to="/about">關於</RouterLink>
+      <RouterLink :to="{path:'/about'}">關於</RouterLink>
     </div>
 
     <!--展示區: 此區可能會展示各種組件，但需看路徑。-->
