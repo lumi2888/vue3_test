@@ -7,7 +7,7 @@
     <button @click="changName">修改名字</button>
     <button @click="changeAge">修改年齡</button>
     <button @click="showTel">查看聯繫方式</button>
-  </div>
+  </div><br>
 </template>
 
 <!--使用 TypeScript 撰寫-->

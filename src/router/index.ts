@@ -11,31 +11,43 @@ import Detail from '@/pages/Detail.vue'
 
 //step2:建立路由器
 const router = createRouter({
-    history:createWebHashHistory(), // 路由器的工作模式
-    routes:[ // 各自的路由規則
+    history: createWebHashHistory(), // 路由器的工作模式
+    routes: [ // 各自的路由規則
         {
-            name:'aaa',
-            path:'/home', // 路徑名自訂
-            component:Home
+            name: 'aaa',
+            path: '/home',
+            component: Home
         },
         {
-            name:'bbb',
-            path:'/news',
-            component:News,
-            children:[
+            name: 'bbb',
+            path: '/news',
+            component: News,
+            children: [
                 {
-                    // params 參數
-                    name:'lulu',
-                    path:'detail/:id/:title/:content?', // 設定 params 的路由規則
-                    component:Detail
+                    name: 'lulu',
+                    path: 'detail/:id/:title/:content?', 
+                    component: Detail,
+                    
+                    // 方法一:將 params 參數傳給路由組件，並透過 props 接收。
+                    //props: true
+
+                    //方法二:可自訂傳給路由組件的 props 資料(要對應該傳遞的模式)
+                      props(route){
+                        return route.params
+                    }
                 }
             ]
         },
         {
-            name:'ccc',
-            path:'/about',
-            component:About
+            name: 'ccc',
+            path: '/about',
+            component: About
         },
+        // redirect:重定向
+        {
+            path:'/',
+            redirect:'/home'
+        }
     ]
 })
 

@@ -1,4 +1,7 @@
-<script lang="ts" setup name="App">
+<!--App.vue 父組件-->
+
+<!--setup:自動處理元件設定-->
+<script lang="ts" setup name="App"> // name 不寫時則為預設名
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import Person from './components/Person.vue'
@@ -6,9 +9,7 @@ import Practice from './components/Practice.vue'
 import {ref,onMounted} from 'vue'
 import {RouterView,RouterLink} from 'vue-router'
 
-// 一個效果
-import Count from './components/Count.vue'
-import Effect from './components/Effect.vue'
+let isShow = ref(true) // 初始值為 true
 
 onMounted(()=>{
    console.log('父--mount complete')
@@ -16,16 +17,23 @@ onMounted(()=>{
 
 </script>
 
+<!--寫 HTML 結構 Ex:顯示 Person 組件-->
 <template>
   <div class="app">
     <h2>Vue 路由測試</h2>
-
+    <!--導航區-->
     <div class="navigate">
+      
+      <!--to 字串寫法，直接指定要跳轉的路徑
+         :to 物件寫法，可指定路徑且也能加其他路由資訊(name、query、params)
+         replace 屬性:無法跳回上一頁
+      -->
       <RouterLink to="/home">首頁</RouterLink>
       <RouterLink to="/news">新聞</RouterLink>
       <RouterLink replace :to="{path:'/about'}">關於</RouterLink>
     </div>
 
+    <!--展示區: 此區可能會展示各種組件，但需看路徑。-->
     <div class="main-content">
       <RouterView></RouterView>
     </div>
@@ -37,8 +45,6 @@ onMounted(()=>{
       <HelloWorld msg="You did it!" />
       <Person />
       <Practice />
-      <Count />
-      <Effect />
     </div>
   </header>
 

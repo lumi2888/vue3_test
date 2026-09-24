@@ -1,14 +1,13 @@
 <template>
     <h2>Details</h2>
     <ul>
-        <li>編號: {{ route.params.id }}</li>
-        <li>標題: {{ route.params.title }}</li>
-        <li>內容: {{ route.params.content }}</li>
+        <li>編號: {{ id }}</li>
+        <li>標題: {{ title }}</li>
+        <li>內容: {{ content }}</li>
     </ul>
 </template>
 
 <script setup lang="ts" name="About">
-import { useRoute } from 'vue-router'
-const route = useRoute()
-console.log(route)
+defineProps(['id','title','content'])
+
 </script>

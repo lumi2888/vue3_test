@@ -1,0 +1,108 @@
+<!--News.vue-->
+<template>
+    <div class="news">
+        <!--說明嵌套路由的概念-->
+        <!--導航區-->
+        <ul>
+            <li v-for="news in newlist" :key="news.id">
+            <!--params 參數值-->
+
+            <!-- 方法一 -->
+            <!-- <RouterLink :to="`/news/detail/${news.id}/${news.title}/${news.content}`">{{ news.title }}</RouterLink> -->
+
+            <!-- 方法二 -->
+             <RouterLink
+             :to="{
+                // 若使用 to 物件寫法，必須使用 name 配置項，不能用 path。
+                name:'lulu',
+                params:{
+                    id:news.id,
+                    title:news.title,
+                    content:news.content, // 如果不需要此內容，註解後，需在 params 的路由規則參數後加上?
+                }
+             }"
+             >
+             {{ news.title }}
+            </RouterLink>
+            </li>
+        </ul>
+        <!--展示區-->
+        <div>
+            <RouterView></RouterView>
+        </div>
+    </div>
+</template>
+
+<script setup lang="ts" name="News">
+import {reactive} from 'vue'
+import {RouterView,RouterLink} from 'vue-router'
+
+const newlist = reactive([
+    {id:'asfdtrfay01',title:'food',content:'fish'},
+    {id:'asfdtrfay02',title:'plant',content:'flower'},
+    {id:'asfdtrfay03',title:'weather',content:'rain'},
+    {id:'asfdtrfay04',title:'product',content:'phone'}
+])
+</script>
+___________________________________________________________________
+<!--Detail.vue-->
+<template>
+    <h2>Details</h2>
+    <ul>
+        <li>編號: {{ route.params.id }}</li>
+        <li>標題: {{ route.params.title }}</li>
+        <li>內容: {{ route.params.content }}</li>
+    </ul>
+</template>
+
+<script setup lang="ts" name="About">
+import { useRoute } from 'vue-router'
+const route = useRoute()
+console.log(route)
+</script>
+___________________________________________________________________
+
+//index.ts
+// 建立一個路由器，並匯出
+
+//step1:引入 createRouter
+import {createRouter,createWebHashHistory} from 'vue-router'
+
+// 引入需要呈現的組件
+import Home from '@/pages/Home.vue'
+import News from '@/pages/News.vue'
+import About from '@/pages/About.vue'
+import Detail from '@/pages/Detail.vue'
+
+//step2:建立路由器
+const router = createRouter({
+    history:createWebHashHistory(), // 路由器的工作模式
+    routes:[ // 各自的路由規則
+        {
+            name:'aaa',
+            path:'/home', // 路徑名自訂
+            component:Home
+        },
+        {
+            name:'bbb',
+            path:'/news',
+            component:News,
+            children:[
+                {
+                    // params 參數
+                    name:'lulu',
+                    path:'detail/:id/:title/:content?', // 設定 params 的路由規則
+                    component:Detail
+                }
+            ]
+        },
+        {
+            name:'ccc',
+            path:'/about',
+            component:About
+        },
+    ]
+})
+
+// 匯出 router
+export default router
