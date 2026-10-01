@@ -4,7 +4,7 @@ import axios from 'axios'
 // 匯出函式，使其他檔案可使用
 export default function(){
 
-    // 數據
+    // 資料
     let dogList = reactive([
    'https://images.dog.ceo/breeds/retriever-golden/n02099601_3360.jpg'
 ])

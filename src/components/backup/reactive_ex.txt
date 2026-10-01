@@ -20,7 +20,7 @@
 <script lang="ts" setup name="Practice">
 import { reactive } from 'vue'
 
-//數據
+//資料
 let car = reactive({ brand: 'Toyota', price: 100 })
 let games = reactive([
     {id: 'aysdytfsatr01',name: 'GTA5'},

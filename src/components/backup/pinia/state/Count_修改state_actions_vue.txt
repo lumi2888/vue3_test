@@ -1,0 +1,53 @@
+<template>
+    <div>
+        <!--提示：因使用 store 實例，不可直接寫{{ sum }}-->
+        <h2>當前求和為:{{ countStore.sum }} </h2>
+        <h3>Welcome to: {{ countStore.school }} , Address: {{ countStore.address }}</h3>
+        <!--下拉選單:
+            把選到的值存入 n
+         -->
+        <select v-model.number="n">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+        <button @click="add">加</button>
+        <button @click="minus">減</button><br><br>
+    </div>
+</template>
+
+<script setup lang="ts" name="Count">
+import {ref} from 'vue'
+
+// 引入 useCountStore
+import {useCountStore} from '@/store/count'
+// 使用 useCountStore，並得到一個專門儲存 count 相關的 store。
+const countStore = useCountStore()
+
+/*以下兩種方法皆可取得 state 中的數據:
+  console.log('@@@',countStore.sum) 
+  console.log('@@@',countStore.$state.sum) 
+*/
+
+// 單元件(ref)，資料範圍:僅限當前組件內部
+// let sum = ref(1) 當前求和
+
+let n = ref(1) // 使用者選擇的數字
+
+function add(){
+    // sum.value += n.value (單)
+    // 1.修改方式:直接修改 -> countStore.sum += 1
+    // 2.修改方式:批量修改，使用 $patch 一次更新多個不同的屬性。
+    /* countStore.$patch({
+        sum:888,
+        school:'PU',
+        address:'asdf123'
+    }) */
+    // *重要:3.修改方式:action 處理
+    countStore.increment(n.value)
+
+}
+function minus(){
+    // sum.value -=n.value (單)
+}
+</script>

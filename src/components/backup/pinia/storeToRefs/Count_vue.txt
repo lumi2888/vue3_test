@@ -1,8 +1,8 @@
 <template>
     <div>
 
-        <h2>當前求和為:{{ sum }}, 放大十倍後:{{bigSum}} </h2>
-        <h3>Welcome to: {{ school }} , Address: {{ address }}, 大寫:{{upperSchool}}</h3>
+        <h2>當前求和為:{{ sum }} </h2>
+        <h3>Welcome to: {{ school }} , Address: {{ address }}</h3>
         <!--下拉選單:
             把選到的值存入 n
          -->
@@ -25,7 +25,7 @@ import {useCountStore} from '@/store/count'
 // 使用 useCountStore，並得到一個專門儲存 count 相關的 store。
 const countStore = useCountStore()
 // 把 Store 裡的 state 拆出並保持響應式，且 actions 裡的方法不會被 storeToRefs 處理。
-const {sum,school,address,bigSum,upperSchool} = storeToRefs(countStore)
+const {sum,school,address} = storeToRefs(countStore)
 
 
 // 資料

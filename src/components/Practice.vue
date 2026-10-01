@@ -1,4 +1,4 @@
-<!--子組件-->
+<!--子元件-->
 <template>
     <div class="practice">
       <h2>當前求和為:{{sum}},放大10背後{{bigsum}}</h2>

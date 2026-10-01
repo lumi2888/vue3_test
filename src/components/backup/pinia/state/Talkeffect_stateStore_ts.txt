@@ -1,0 +1,17 @@
+import {defineStore} from 'pinia'
+export const useTalkStore = defineStore('talk',{
+    // state:狀態 真正儲存數據的地方
+    state(){
+        return{
+            newList:[
+                {id:'ftrfasdf01',title:'葡萄'},
+                {id:'ftrfasdf02',title:'草莓'},
+                {id:'ftrfasdf03',title:'奇異果'},
+            ]
+        }
+    }
+})
+
+/*註: 
+  pinia有多個概念 -> 其一:state -> 專屬類別:count
+*/

@@ -8,7 +8,8 @@ import {RouterView,RouterLink} from 'vue-router'
 
 // 一個效果
 import Count from './components/Count.vue'
-import Effect from './components/Effect.vue'
+import Effect from './components/Talkeffect.vue'
+import Father from './pages/$attrs_05/Father.vue'
 
 onMounted(()=>{
    console.log('父--mount complete')
@@ -35,6 +36,7 @@ onMounted(()=>{
 
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
+      <Father />
       <Person />
       <Practice />
       <Count />

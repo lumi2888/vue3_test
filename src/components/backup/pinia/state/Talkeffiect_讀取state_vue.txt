@@ -2,7 +2,7 @@
     <div>
         <button @click="getFruit">get</button>
         <ul>
-            <li v-for="item in newList" :key="item.id">{{ item.title }}</li>
+            <li v-for="item in talkStore.newList" :key="item.id">{{ item.title }}</li>
         </ul>
     </div>
 
@@ -12,20 +12,25 @@
 import {reactive} from 'vue'
 import axios from "axios"; // 需先安裝 axios: npm i axios
 import {nanoid} from 'nanoid'
+import {useTalkStore} from '@/store/talkeffect'
 
-let newList = reactive([
+const talkStore = useTalkStore()
+
+/* 單元件
+    let newList = reactive([
     {id:'ftrfasdf01',title:'葡萄'},
     {id:'ftrfasdf02',title:'草莓'},
     {id:'ftrfasdf03',title:'奇異果'},
-])
+]) 
+    */
 
 async function getFruit(){
     // 發送 request
-    let result = await axios.get('https://dummyjson.com/quotes/random')
-    // response 的字串，整理為一個物件
-    let obj = {id:nanoid(),title:result.data.quote} // quote: F12 查該欄位
+    // let result = await axios.get('https://dummyjson.com/quotes/random')
+    // response 的字串(nanoid)，整理為一個物件
+    // let obj = {id:nanoid(),title:result.data.quote} // quote: F12 查該欄位名稱
     // 放到陣列中
-    newList.unshift(obj) // unshift:新增資料到陣列最前面 
+    // newList.unshift(obj) // unshift:新增資料到陣列最前面 
 }
 </script>
 

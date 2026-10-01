@@ -9,7 +9,7 @@
 <script lang="ts" setup name="Practice">
 import {ref,watch} from 'vue'
 
-//數據
+//資料
 let sum = ref(0) //sum 為 ref 定義的基本類型資料
 
 //方法

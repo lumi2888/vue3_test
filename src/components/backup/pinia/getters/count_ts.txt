@@ -1,0 +1,33 @@
+// 使用pinia 存放計數相關的內容
+import {defineStore} from 'pinia'
+export const useCountStore = defineStore('count',{
+    // actions 裡面是放置方法(函式)的地方，用於響應組建中的"動作"
+    // 使用遞增的方法:increment
+    actions:{
+        increment(value:any){
+            console.log('increment被調用',value)
+            if(this.sum < 10){
+                // 修改數據(this 是當前的 store)
+                this.sum += value
+            }
+        }
+    },
+    // state:狀態 真正儲存數據的地方
+    state(){
+        return{
+            sum:1,
+            school:'xxx',
+            address:'fffttt123'
+        }
+    },
+    getters:{
+        bigSum:state => state.sum * 10, // 根據 sum 計算新的結果
+        upperSchool():string{
+            return this.school.toUpperCase() // 將 school 轉成大寫
+        }
+    }
+})
+
+/*註: 
+  pinia有多個概念 -> 其一:state -> 專屬類別:count
+*/

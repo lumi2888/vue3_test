@@ -9,10 +9,19 @@ import App from './App.vue'
 // 引入路由器
 import router from './router'
 
+// step1:引入 pinia
+import {createPinia} from 'pinia'
+import emitter  from '@/utils/emitter'
+
 // App組件掛載到index.html(id為app的元素上)
 //createApp(App).mount('#app')
 // 建立一個應用
 const app = createApp(App)
+
+// step2:建立 pinia
+const pinia = createPinia()
+// step3:安裝 pinia
+app.use(pinia)
 
 // 使用路由器
 app.use(router)

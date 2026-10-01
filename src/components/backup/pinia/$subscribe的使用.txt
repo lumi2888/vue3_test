@@ -1,0 +1,58 @@
+<!--Talkeffect.vue-->
+<template>
+    <div>
+        <button @click="getFruit">get</button>
+        <ul>
+            <li v-for="item in newList" :key="item.id">{{ item.title }}</li>
+        </ul>
+    </div>
+
+</template>
+
+<script setup lang="ts" name="Effect">
+import {useTalkStore} from '@/store/talkeffect'
+import { storeToRefs } from 'pinia'
+
+const talkStore = useTalkStore()
+const {newList} = storeToRefs(talkStore)
+
+// $subscribe:監視 Store 資料變化
+// mutate:修改資訊 state:目前最新資料
+talkStore.$subscribe((mutate,state)=>{
+    console.log('talkStore裡面保存數據發生變化',mutate,state)
+    localStorage.setItem('newList',JSON.stringify(state.newList))
+})
+
+// 方法
+function getFruit(){
+    talkStore.getATalk()
+}
+</script>
+
+<style scoped>
+
+</style>
+__________________________________________________________________
+// talkeffect.ts
+import {defineStore} from 'pinia'
+import axios from 'axios'
+import {nanoid} from 'nanoid'
+
+export const useTalkStore = defineStore('talk',{
+    actions:{
+       async getATalk(){
+            // 發送 request
+            let result = await axios.get('https://dummyjson.com/quotes/random')
+            // response 的字串(nanoid)，整理為一個物件
+            let obj = {id:nanoid(),title:result.data.quote} // quote: F12 查該欄位名稱
+            // 放到陣列中
+            this.newList.unshift(obj) // unshift:新增資料到陣列最前面 
+        }
+    },
+    // state:狀態 真正儲存資料的地方
+    state(){
+        return{
+            newList:JSON.parse(localStorage.getItem('newList') as string) || []
+        }
+    }
+})

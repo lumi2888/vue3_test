@@ -1,7 +1,7 @@
 import {ref,onMounted,computed} from 'vue'
 
 export default function(){
-    // 數據
+    // 資料
     let sum = ref(0)
     let bigsum = computed(()=>{
         return sum.value *10

@@ -1,5 +1,5 @@
 
-<!--App.vue 父組件-->
+<!--App.vue 父元件-->
 <!--setup:自動處理元件設定-->
 <script lang="ts" setup name="App"> // name 不寫時則為預設名
 import Practice from './components/Practice.vue'
@@ -39,7 +39,7 @@ console.log(personlist)
 </template>
 _______________________________________________________________
 
-<!--Practice.vue 子組件-->
+<!--Practice.vue 子元件-->
 <template>
     <div class="practice">
        <u1>
@@ -54,7 +54,7 @@ _______________________________________________________________
 <script lang="ts" setup name="Practice">
 import {type  persons} from '@/types'
 
-// 接收父組件傳入的資料
+// 接收父元件傳入的資料
    //defineProps(['list'])
 
 // 接收 list，並限制類型
