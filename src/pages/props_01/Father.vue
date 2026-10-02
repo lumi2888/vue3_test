@@ -30,6 +30,4 @@ function getToy(value:string){
 <style>
 </style>
 
-<!--註:
-    props: 父->子,子->父 
--->
+<!-- props: 父傳子,子傳父 -->

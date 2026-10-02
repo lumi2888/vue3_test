@@ -9,7 +9,7 @@ import {RouterView,RouterLink} from 'vue-router'
 // 一個效果
 import Count from './components/Count.vue'
 import Effect from './components/Talkeffect.vue'
-import Father from './pages/$attrs_05/Father.vue'
+import Father from './pages/slot_09/Father.vue'
 
 onMounted(()=>{
    console.log('父--mount complete')
