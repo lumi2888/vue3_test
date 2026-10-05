@@ -2,6 +2,9 @@
 <template>
 <div class="category">
     <h2>{{ title }}</h2>
+    <!-- 插槽:當父元件傳入內容時，會顯示在這裡 -->
+     <!-- 如果未傳，則顯示預設內容 -->
+    <slot>預設內容</slot>
 </div>
 </template>
 

@@ -1,6 +1,7 @@
 <template>
     <div class="father">
         <h3>父元件</h3>
+        <h3>參考 backup.pinia</h3>
     </div>
 </template>
 

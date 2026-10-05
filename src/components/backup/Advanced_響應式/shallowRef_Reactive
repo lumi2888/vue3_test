@@ -1,0 +1,125 @@
+<!-- App.vue -->
+<script lang="ts" setup name="App">
+
+// shallowRef 和 shallowReactive 淺層響應式(只對第一層做處理)
+// 目的:避免對每個內部屬性都做響應式，可降低成本並提升效能。
+import {ref,reactive,shallowRef,shallowReactive} from 'vue'
+
+let sum = shallowRef(0)
+let person = shallowRef({
+  name:'張三',
+  age:18
+})
+let car = shallowReactive({
+  brand:'toyota',
+  options:{
+    color:'red',
+    engine:'V8'
+  }
+})
+
+function changeSum(){
+  sum.value +=1
+}
+function changeName(){
+  person.value.name = '李四'
+}
+function changeAge(){
+  person.value.age += 1
+}
+function changePerson(){
+  person.value = {name:'tony',age:100}
+}
+
+function changeBrand(){
+  car.brand = 'BMW'
+}
+function changeColor(){
+  car.options.color = 'blue'
+}
+function changeEngine(){
+  car.options.engine = 'V12'
+}
+function changeCar(){
+  Object.assign(car,{})
+}
+</script>
+
+<template>
+  <div class="app">
+    <h2>求和為: {{sum}}</h2>
+    <h2>名字為: {{person.name }}</h2>
+    <h2>年齡為: {{person.age}}</h2>
+    <h2>汽車訊息: {{car}}</h2>
+
+    <button @click="changeSum">sum+1</button>
+    <button @click="changeName">修改名字</button>
+    <button @click="changeAge">修改年齡</button>
+    <button @click="changePerson">修改人</button>
+    <span>| </span>
+    <button @click="changeBrand">修改品牌</button>
+    <button @click="changeColor">修改顏色</button>
+    <button @click="changeEngine">修改發動機</button>
+    <button @click="changeCar">修改整個車</button>
+    <h2>Vue 路由測試</h2>
+
+    <div class="navigate">
+      <RouterLink to="/home">首頁</RouterLink>
+      <RouterLink to="/news">新聞</RouterLink>
+      <RouterLink replace :to="{path:'/about'}">關於</RouterLink>
+    </div>
+
+    <div class="main-content">
+      <RouterView></RouterView>
+    </div>
+  </div>
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+      <Father />
+      <Person />
+      <Practice />
+      <Count />
+      <Effect />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
+</template>
+
+<!--寫 CSS 樣式-->
+<style scoped>
+header {
+  line-height: 1.5;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+button{
+  margin-right: 5px;
+}
+</style>

@@ -9,6 +9,11 @@ import Practice from './components/Practice.vue'
 import {ref,onMounted} from 'vue'
 import {RouterView,RouterLink} from 'vue-router'
 
+// 一個效果
+import Count from './components/Count.vue'
+import Effect from './components/Talkeffect.vue'
+import Father from './pages/slot_09/Father.vue'
+
 let isShow = ref(true) // 初始值為 true
 
 onMounted(()=>{
