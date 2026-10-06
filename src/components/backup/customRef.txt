@@ -1,0 +1,105 @@
+// App.vue
+import {ref} from 'vue'
+import useMsgRef from './useMsgRef'
+
+// 使用 vue 預設 ref 定義的響應式資料，資料一變化，頁面則更新
+//let msg = ref('你好')
+
+// 使用 useMsgRef 定義響應式資料且有延遲效果
+let {msg} = useMsgRef('你好',2000)
+</script>
+
+<template>
+  <div class="app">
+    <h2>{{ msg }}</h2>
+    <input type="text" v-model="msg">
+
+    <h2>Vue 路由測試</h2>
+    <div class="navigate">
+      <RouterLink to="/home">首頁</RouterLink>
+      <RouterLink to="/news">新聞</RouterLink>
+      <RouterLink replace :to="{path:'/about'}">關於</RouterLink>
+    </div>
+
+    <div class="main-content">
+      <RouterView></RouterView>
+    </div>
+  </div>
+  <header>
+    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <HelloWorld msg="You did it!" />
+      <Father />
+      <Person />
+      <Practice />
+      <Count />
+      <Effect />
+    </div>
+  </header>
+
+  <main>
+    <TheWelcome />
+  </main>
+</template>
+
+<!--寫 CSS 樣式-->
+<style scoped>
+header {
+  line-height: 1.5;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+button{
+  margin-right: 5px;
+}
+</style>
+__________________________________________________________________________________
+// useMsgRef.ts
+
+import { customRef } from "vue";
+
+export default function(initvalue:string,delay:number){
+    // 使用 vue customRef 定義響應式資料
+    let timer:number
+    // track 跟蹤、trigger 觸發
+    let msg = customRef((track,trigger)=>{
+        return{
+            // msg 被讀取時回傳
+            get(){
+                track() // 目的:追蹤 msg
+                return initvalue
+            },
+            // msg 被修改時回傳
+            set(value){
+                clearTimeout(timer)
+                timer = setTimeout(()=>{
+                    initvalue = value
+                    trigger() // 當資料改變時，則通知 vue3 並觸發更新。
+                     },delay) // delay:延遲
+                    }
+                }
+            })
+            return {msg}
+        }

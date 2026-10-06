@@ -10,17 +10,13 @@ import Count from './components/Count.vue'
 import Effect from './components/Talkeffect.vue'
 import Father from './pages/slot_09/Father.vue'
 
-import {ref} from 'vue'
 
-// 使用 vue 預設 ref 定義的響應式資料，資料一變化，頁面則更新
-let msg = ref('你好')
 </script>
 
 <template>
   <div class="app">
-    <h2>{{ msg }}</h2>
-    <input type="text" v-model="msg">
 
+    
     <h2>Vue 路由測試</h2>
     <div class="navigate">
       <RouterLink to="/home">首頁</RouterLink>
